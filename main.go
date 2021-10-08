@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gitlab.com/Dank-del/SpamProtection-Mirror-Bot/database"
 	"gitlab.com/Dank-del/SpamProtection-Mirror-Bot/handlers"
 	"go.uber.org/zap"
 	"log"
@@ -26,9 +27,10 @@ func main() {
 	core.SUGARED = loggerMgr.Sugar()
 	b, up, err := core.BotInit(e)
 	if err != nil {
-		return 
+		log.Fatal(err)
 	}
 	handlers.LoadHandlers(up.Dispatcher)
+	database.StartDatabase(e.DatabaseName)
 	logger.Info(b.FirstName, " has started, ID: ", b.Id)
 	up.Idle()
 }

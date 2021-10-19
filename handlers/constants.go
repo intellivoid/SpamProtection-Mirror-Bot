@@ -1,7 +1,11 @@
 package handlers
 
 const (
-	HELP_CMD  = "help"
-	START_CMD = "start"
-	FETCH_CMD = "fetch"
+	HelpCmd     = "help"
+	StartCmd    = "start"
+	FetchCmd    = "fetch"
+	SettingsCmd = "settings"
+	PrivateChat = "private"
+	MarkdownV2  = "markdownv2"
+	TimeLayout  = "Jan 2, 2006 at 3:04pm (MST)"
 )

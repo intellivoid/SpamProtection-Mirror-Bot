@@ -7,12 +7,15 @@ import (
 )
 
 type ShiinaConfig struct {
-	BotToken     string
-	DatabaseName string
-	BotAdmins    []int64
-	Debug bool
-	DropUpdates bool
+	BotToken       string
+	DatabaseName   string
+	CoffeeHouseKey string
+	BotAdmins      []int64
+	Debug          bool
+	DropUpdates    bool
 }
+
+var Data *ShiinaConfig
 
 func NewShiinaConfig() *ShiinaConfig {
 	return &ShiinaConfig{}
@@ -30,6 +33,7 @@ func (c *ShiinaConfig) ReadFile(path string) error {
 	c.BotAdmins = conf.GetInt64List("ShiinaConfig.BotAdmins")
 	c.Debug = conf.GetBoolean("ShiinaConfig.Debug")
 	c.DropUpdates = conf.GetBoolean("ShiinaConfig.DropUpdates")
+	Data = c
 	return nil
 }
 

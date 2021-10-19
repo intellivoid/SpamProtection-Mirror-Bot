@@ -8,10 +8,17 @@ import (
 	"strings"
 )
 
-func SendError(err error, ctx *ext.Context, b *gotgbot.Bot) {
+func SendError(err error, ctx *ext.Context, b *gotgbot.Bot) error {
+	if err == nil {
+		return nil
+	}
 	msg := mdparser.GetBold("Error: ").AppendItalic(err.Error())
-	_, er := b.SendMessage(ctx.EffectiveChat.Id, strings.ReplaceAll(msg.ToString(), b.Token, "token"), &gotgbot.SendMessageOpts{ParseMode: "markdownv2"})
+	txt := msg.ToString()
+	m := strings.ReplaceAll(txt, b.Token, "token")
+	m = strings.ReplaceAll(m, core.Data.CoffeeHouseKey, "cf_key")
+	_, er := b.SendMessage(ctx.EffectiveChat.Id, m, &gotgbot.SendMessageOpts{ParseMode: "markdownv2"})
 	if er != nil {
 		core.SUGARED.Error(err)
 	}
+	return err
 }

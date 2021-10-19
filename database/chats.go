@@ -10,7 +10,17 @@ type Chat struct {
 }
 
 func (c *Chat) DoesAutoBan() bool {
+	if c == nil {
+		return false
+	}
 	return c.AutoBan
+}
+
+func (c *Chat) DetectSpam() bool {
+	if c == nil {
+		return false
+	}
+	return c.SpamDetect
 }
 
 func InsertChat(ChatID int64, AutoBan bool, SpamDetect bool, SpamAction string) {

@@ -21,8 +21,7 @@ func autoBanHandler(b *gotgbot.Bot, ctx *ext.Context) error {
 	}
 	data, err := spamProtection.GetInfoByID(user.Id)
 	if err != nil {
-		helpers.SendError(err, ctx, b)
-		return err
+		return helpers.SendError(err, ctx, b)
 	}
 	if !data.Success {
 		return nil
